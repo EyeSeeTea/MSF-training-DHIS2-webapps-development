@@ -99,8 +99,8 @@ Cypress.Commands.add("selectInDropdown", (containerSelector, label, option) => {
 
 // Commands using Cypress Testing Library
 Cypress.Commands.add("expandNode", label => {
-    cy.findByText(label).click();
-    // cy.findByText(label)
-    // cy.findAllByRole("progressbar").should("not.exist");
-    // cy.findByText(label).click();
+    cy.findByText(label).then(treeNodeText => {
+        cy.findAllByRole("progressbar").should("not.exist");
+        treeNodeText.click();
+    });
 });
