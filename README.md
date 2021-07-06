@@ -1,122 +1,68 @@
-# DHIS2 webapps development - MSF training - HMIS Configuration App
+# DHIS2 webapps development - MSF training - Session 4
 
--   DHIS2 web application development using React, Material-UI and Clean Architecture.
+-   We are going to practice unit testing using Jest.
+-   We are going to practice UI testing using Cypress
 
-## Training requirements 
+## Requirements
 
--   A DHIS2 server instance up and running with CORS enabled for the localhost:8080
--   You will have to fork and clone this repository
--   Install yarn and npm
+### Prepare your working branch
+According to branch to make the exercise
 
-## Branches
+#### From your own session 3 solution
+ - If you will make the exercise in own branch from your solution in session 3
+ - You will must make changes to prepare branch as in this [commit](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/commit/b97aea22dd00777f87c5acde9ab43bcfd13a8a73)
+- remember execute `yarn install` because we have added the cypress testing library dependency
+#### From session 4 branch
+ - Checkout the session_4 branch
+ - if you fork repository has not the session_4 branch then [add this repository as upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork) and checkout the session_4 branch
 
--   Master contains the full solution developed by EyeSeeTea (we recommended not to see the solution until the last session)
--   [session_1](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_1) is the branch for session 1 exercise
--   [session_2](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_2) is the branch for session 2 exercise (work in progress)
--   [session_3](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session3) is the branch for session 3 exercise 
--   session_4 is the branch for session 4 exercise (work in progress)
+### Repository secret
+- If you are working in a fork, then to add a new repository secret with auth credentials for Cypress tests
+- secret name: CYPRESS_DHIS2_AUTH
+- secret value: username:password
 
-## Setup
 
-Install dependencies:
+https://user-images.githubusercontent.com/5593590/124573810-2aaf2680-de4a-11eb-8b19-3db6318c5a7a.mp4
 
-```
-$ yarn install
-```
 
-## Development
+## Tasks 
 
-Start development server:
+### unit test
+Create a new User.spec.ts file in the src/domain/entities/__tests__/ path
+- Create an unit test to validate prop isAdmin given a user data with ALL authority
+- Create an unit test to validate prop isAdmin given a user data without ALL authority
 
-```
-$ PORT=8081 REACT_APP_DHIS2_BASE_URL="DHIS2_INSTANCE_URL" yarn start
-```
+### UI tests
+The tests to create will be added in the training-page.spec.js file under cypress/integrations/training-page.spec.js file.
+- Create a test to validate when to click on a strikethrough org unit then in the detail panel should appear the text 'The selected organisation unit is disabled'
+- Create a Cypress tests to validate edit action in a level 4 org unit
 
-Linting:
+## Considerations
+- Try use Cypress Testing Library commands
+- Modify if you need the form elements to convert it to accesible
 
-```
-$ yarn lint
-```
+https://material-ui.com/es/components/text-fields/#accessibility
 
-## Browsers
+## Browser
 
-If you have SameSite policy problems run in chrome, launch Chrome from terminal:
+Avoid use chrome to avoid security bugs
 
-OSX
-```
-open -a Google\ Chrome --args -disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure --user-data-dir
-```
+- in the cypress ui select other browser
+- in console use `yarn cy:e2e:run --browser firefox`
 
-Linux
-```
- google-chrome --disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure
-```
-
-Windows
-```
-chrome -disable-features=SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure
-```
-
-Remember that you can add other flags to that call 
-
-`--disable-web-security`
-
-## Tests
-
-Run unit tests:
+## Execute unit tests
 
 ```
-$ yarn test
+yarn test
 ```
 
-Run integration tests locally:
+## Execute cypress tests
 
 ```
-$ export CYPRESS_DHIS2_AUTH='admin:district'
-$ export CYPRESS_EXTERNAL_API="DHIS2_INSTANCE_URL"
-$ export CYPRESS_ROOT_URL=http://localhost:8081
+export CYPRESS_DHIS2_AUTH=user:password
+export CYPRESS_EXTERNAL_API=http://ec2-54-195-131-72.eu-west-1.compute.amazonaws.com
+export CYPRESS_ROOT_URL=http://localhost:8081
 
-# non-interactive
-$ yarn cy:e2e:run
-
-# interactive UI
-$ yarn cy:e2e:open
+yarn cy:e2e:run --browser firefox
 ```
 
-## Build app ZIP
-
-```
-$ yarn build-webapp
-```
-
-## Some development tips
-
-### Structure
-
--   `i18n/`: Contains literal translations (gettext format)
--   `public/`: Main app folder with a `index.html`, exposes the APP, contains the feedback-tool.
--   `src/webapp`: Presentation UI Layer (clean architecture)
--   `src/webapp/pages`: Main React components.
--   `src/webapp/components`: Reusable React components.
--   `src/domain`: Domain layer of the app (clean architecture)
--   `src/data`: Data of the app (clean architecture)
--   `src/types`: `.d.ts` file types for modules without TS definitions.
--   `src/utils`: Misc utilities.
--   `src/locales`: Auto-generated, do not update or add to the version control.
--   `cypress/integration/`: Cypress integration tests.
-
-### i18n
-
-```
-$ yarn update-po
-# ... add/edit translations in i18n/*.po files ...
-$ yarn localize
-```
-
-### App context
-
-The file `src/contexts/app-context.ts` holds some general context so typical infrastructure objects (`compositionRoot`, ...) are readily available. Add your own global objects if necessary.
-
-### Scripts
-
-Check the example script, entry `"script-example"`in `package.json`->scripts and `src/scripts/example.ts`.
