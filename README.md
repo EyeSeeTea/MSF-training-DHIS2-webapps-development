@@ -15,6 +15,7 @@ According to branch to make the exercise
 #### From session 4 branch
  - Checkout the session_4 branch
  - if your fork repository has not the session_4 branch then [add this repository as upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork) and checkout the session_4 branch
+ - remember execute `yarn install` because we have added the cypress testing library dependency
 
 ### Repository secret
 - If you are working in a fork, then to add a new repository secret with auth credentials for Cypress tests
@@ -22,11 +23,7 @@ According to branch to make the exercise
 - secret value: username:password
 
 
-
-
 https://user-images.githubusercontent.com/5593590/124708572-be403000-defa-11eb-9d40-a52ea6e6fefb.mp4
-
-
 
 
 ## Tasks 
