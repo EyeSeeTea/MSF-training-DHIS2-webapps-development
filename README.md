@@ -22,7 +22,11 @@ According to branch to make the exercise
 - secret value: username:password
 
 
-https://user-images.githubusercontent.com/5593590/124573810-2aaf2680-de4a-11eb-8b19-3db6318c5a7a.mp4
+
+
+https://user-images.githubusercontent.com/5593590/124708572-be403000-defa-11eb-9d40-a52ea6e6fefb.mp4
+
+
 
 
 ## Tasks 
