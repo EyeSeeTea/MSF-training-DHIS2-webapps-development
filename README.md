@@ -12,9 +12,9 @@
 
 -   Master contains the full solution developed by EyeSeeTea (we recommended not to see the solution until the last session)
 -   [session_1](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_1) is the branch for session 1 exercise
--   [session_2](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_2) is the branch for session 2 exercise (work in progress)
+-   [session_2](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_2) is the branch for session 2 exercise 
 -   [session_3](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session3) is the branch for session 3 exercise 
--   session_4 is the branch for session 4 exercise (work in progress)
+-   [session_4](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/tree/session_4) is the branch for session 4 exercise
 
 ## Setup
 
