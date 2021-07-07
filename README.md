@@ -1,13 +1,69 @@
-# MSF training DHIS2 webapps development - session 2
+# DHIS2 webapps development - MSF training - Session 4
 
--   We are going to practice Dhis2 apps Development using React, Material-UI, EyeSeeTea libraries and Clean Architecture.
--   Clean Architecture is a way of structuring code.
--   It's necessary a dhis2 server instance
--   The current code is our solution to session 1
+-   We are going to practice unit testing using Jest.
+-   We are going to practice UI testing using Cypress
 
-## Training requirements 
+## Requirements
+
+### Prepare your working branch
+According to branch to make the exercise
+
+#### From your own session 3 solution
+ - If you are going to make the exercise in own branch from your solution in session 3
+ - You will must make changes to prepare branch as in this [pull request](https://github.com/EyeSeeTea/MSF-training-DHIS2-webapps-development/pull/5)
+ - remember execute `yarn install` because we have added the cypress testing library dependency
+#### From session 4 branch
+ - Checkout the session_4 branch
+ - if your fork repository has not the session_4 branch then [add this repository as upstream](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork) and checkout the session_4 branch
+ - remember execute `yarn install` because we have added the cypress testing library dependency
+
+### Repository secret
+- If you are working in a fork, then to add a new repository secret with auth credentials for Cypress tests
+- secret name: CYPRESS_DHIS2_AUTH
+- secret value: username:password
 
 
+https://user-images.githubusercontent.com/5593590/124708572-be403000-defa-11eb-9d40-a52ea6e6fefb.mp4
 
 
-## Development
+## Tasks 
+
+### unit test
+Create a new User.spec.ts file in the src/domain/entities/__tests__/ path
+
+- Create an unit test to validate prop isAdmin given a user data with ALL authority
+- Create an unit test to validate prop isAdmin given a user data without ALL authority
+
+### UI tests
+The tests to create will be added in the training-page.spec.js file under cypress/integrations/training-page.spec.js file.
+
+- Create a test to validate when on click in a strikethrough org unit then in the detail panel should appear the text 'The selected organisation unit is disabled'
+- Create a Cypress test to validate edit action in a level 4 org unit
+
+## Considerations
+- Try use Cypress Testing Library commands
+- Modify if you need either form elements to convert it to accesible https://material-ui.com/es/components/text-fields/#accessibility
+
+## Browser
+
+Avoid use chrome to avoid security bugs
+
+- in the cypress ui select other browser
+- in console use `yarn cy:e2e:run --browser firefox`
+
+## Execute unit tests
+
+```
+yarn test
+```
+
+## Execute cypress tests
+
+```
+export CYPRESS_DHIS2_AUTH=user:password
+export CYPRESS_EXTERNAL_API=http://ec2-54-195-131-72.eu-west-1.compute.amazonaws.com
+export CYPRESS_ROOT_URL=http://localhost:8081
+
+yarn cy:e2e:run --browser firefox
+```
+
