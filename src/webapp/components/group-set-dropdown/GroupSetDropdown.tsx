@@ -13,26 +13,38 @@ export interface GroupSetDropdownProps {
     groupSet: OrgUnitGroupSet;
     orgUnit: OrgUnit;
     disabled?: boolean;
+    onChange?(selectedGroups: NamedRef[], unselectedGroups: NamedRef[]): void;
 }
 
 export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = ({
     groupSet,
     orgUnit,
     disabled,
+    onChange,
 }) => {
     const { compositionRoot } = useAppContext();
 
-    const [groupOptions, setGroupOptions] = useState<DropdownItem[]>([]);
+    const [groups, setGroups] = useState<NamedRef[]>([]);
+
+    const groupOptions = namedRefToOption(groups);
+
     const intersection = _.intersection(
         orgUnit.organisationUnitGroups.map(({ id }) => id),
         groupOptions.map(({ value }) => value)
     );
 
     useEffect(() => {
-        compositionRoot.groupSets.getOptions.execute(groupSet).then(options => {
-            setGroupOptions(namedRefToOption(options));
+        compositionRoot.groupSets.getOptions.execute(groupSet).then(groups => {
+            setGroups(groups);
         });
     }, [compositionRoot, groupSet]);
+
+    function notifyChange(groupId: string | undefined) {
+        if (!onChange) return;
+        const selectedGroup = groups.filter(group => group.id === groupId);
+        const unselectedGroups = groups.filter(group => group.id !== groupId);
+        onChange(selectedGroup, unselectedGroups);
+    }
 
     return (
         <React.Fragment>
@@ -40,7 +52,7 @@ export const GroupSetDropdown: React.FC<GroupSetDropdownProps> = ({
                 label={formatOrgUnitGroupSet(groupSet)}
                 value={intersection[0]}
                 items={groupOptions}
-                onChange={_.noop}
+                onChange={notifyChange}
                 disabled={disabled}
             />
 
